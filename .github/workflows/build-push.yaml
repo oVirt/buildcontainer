@@ -1,11 +1,13 @@
-name: Build
+name: Build and Push
 on:
   push:
-    branches-ignore:
+    branches:
       - main
+  schedule:
+    - cron: '0 3 * * *'
 jobs:
   build:
-    name: Build
+    name: Build and Push
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,3 +22,5 @@ jobs:
           password: ${{ secrets.QUAY_TOKEN }}
       - name: Build image
         run: docker-compose build
+      - name: Push image
+        run: docker-compose push
