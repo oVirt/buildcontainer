@@ -1,0 +1,12 @@
+version: '3.2'
+services:
+  stream8:
+    build:
+      context: .
+      dockerfile: Dockerfile.stream8
+    image: quay.io/ovirt/buildcontainer:stream8
+  stream9:
+    build:
+      context: .
+      dockerfile: Dockerfile.stream9
+    image: quay.io/ovirt/buildcontainer:stream9
