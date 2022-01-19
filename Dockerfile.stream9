@@ -13,10 +13,20 @@ RUN dnf config-manager --enable crb
 # Install required packages
 RUN dnf install -y \
         createrepo_c \
-        dnf-utils \
-        git \
-        gzip \
-        make \
-        rpm-build \
-        tar
+        dnf-utils
+
 COPY containerroot /
+
+WORKDIR /tmp/src-rpm
+# Download source rpms and install it's dependencies
+RUN reposync --repoid=copr:copr.fedorainfracloud.org:ovirt:ovirt-master-snapshot --source --newest-only \
+    && \
+    find . -iname '*.src.rpm' -exec mv {} . \; \
+    && \
+    dnf builddep -y *.src.rpm \
+    && \
+    rm -rf * \
+    && \
+    dnf clean all
+
+WORKDIR /
