@@ -4,8 +4,8 @@ This repository contains the source files for the build container for oVirt. Thi
 used utilities for building oVirt. The image names are:
 
 ```
-quay.io/ovirt/buildcontainer:stream8
-quay.io/ovirt/buildcontainer:stream9
+quay.io/ovirt/buildcontainer:el8stream
+quay.io/ovirt/buildcontainer:el9stream
 ```
 
 You can use it in GitHub Actions as follows:
@@ -23,13 +23,13 @@ jobs:
         include:
           - name: centos-stream-8
             shortcut: cs8
-            container-name: stream8
+            container-name: el8stream
           - name: centos-stream-9
             shortcut: cs9
-            container-name: stream9
+            container-name: el9stream
     name: ${{ matrix.name }}
     container:
-      image: ghcr.io/ovirt/buildcontainer:${{ matrix.container-name }}
+      image: quay.io/ovirt/buildcontainer:${{ matrix.container-name }}
     steps:
       # Add your steps here
 ```
