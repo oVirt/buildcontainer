@@ -4,9 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.stream8
-    image: quay.io/ovirt/buildcontainer:stream8
+    image: quay.io/ovirt/buildcontainer:el8stream
   stream9:
     build:
       context: .
       dockerfile: Dockerfile.stream9
-    image: quay.io/ovirt/buildcontainer:stream9
+    image: quay.io/ovirt/buildcontainer:el9stream
