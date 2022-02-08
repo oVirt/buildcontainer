@@ -31,8 +31,19 @@ RUN reposync --repoid=copr:copr.fedorainfracloud.org:ovirt:ovirt-master-snapshot
     && \
     dnf builddep -y *.src.rpm \
     && \
-    rm -rf * \
-    && \
-    dnf clean all
+    rm -rf *
 
 WORKDIR /
+
+# Install missing dependencies for oVirt node
+RUN dnf install -y \
+    asciidoc \
+    libvirt \
+    libguestfs-tools\
+    lorax \
+    pykickstart \
+    python3-jinja2 \
+    python3-pyyaml \
+    virt-install \
+    && \
+    dnf clean all
