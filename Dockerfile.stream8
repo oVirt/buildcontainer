@@ -35,12 +35,13 @@ RUN reposync --repoid=copr:copr.fedorainfracloud.org:ovirt:ovirt-master-snapshot
 
 WORKDIR /
 
-# Install missing dependencies for oVirt appliance
+# Install missing dependencies for oVirt appliance and node
 RUN dnf install -y \
     asciidoc \
     libvirt \
     libguestfs-tools\
-    lorax pykickstart \
+    lorax \
+    pykickstart \
     python3-jinja2 \
     python3-pyyaml \
     virt-install \
