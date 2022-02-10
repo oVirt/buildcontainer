@@ -49,8 +49,9 @@ RUN dnf install -y \
     dnf clean all
 
 # Install dependencies for ost-images that we do not ship
-# Only on EL9
-RUN gh repo clone oVirt/ost-images \
+# Only on el9 since el8 container is not usable on el9 host
+# The resulting images are independent of build platform
+RUN git clone https://github.com/oVirt/ost-images.git \
     && cd ost-images \
     && autoreconf -i \
     && ./configure \
