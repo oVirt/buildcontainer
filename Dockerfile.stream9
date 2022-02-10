@@ -47,3 +47,14 @@ RUN dnf install -y \
     virt-install \
     && \
     dnf clean all
+
+# Install dependencies for ost-images that we do not ship
+# Only on EL9
+RUN gh repo clone oVirt/ost-images \
+    && cd ost-images \
+    &&  autoreconf -i \
+    && ./configure \
+    && make spec \
+    && dnf builddep -y ost-images.spec \
+    && cd .. \
+    && rm -rf ost-images
