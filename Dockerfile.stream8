@@ -10,16 +10,16 @@ RUN dnf module enable -y \
     javapackages-tools \
     nodejs:14
 
-# Install the GitHub CLI so actions can use it when running in the container
+# Add "build" user for optional non-root builds
+# Install required packages and the GitHub CLI tool so actions can use it when running in the container
 RUN \
-    dnf -y config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo \
-    && dnf -y install gh \
-    && dnf clean all
-
-# Install required packages
-RUN dnf install -y \
+    useradd build \
+    && dnf -y config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo \
+    && dnf -y install \
+        gh \
         createrepo_c \
-        dnf-utils
+        dnf-utils \
+    && dnf clean all
 
 COPY containerroot /
 
