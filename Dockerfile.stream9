@@ -35,7 +35,7 @@ RUN reposync --repoid=copr:copr.fedorainfracloud.org:ovirt:ovirt-master-snapshot
 
 WORKDIR /
 
-# Install missing dependencies for oVirt node
+# Install missing dependencies for oVirt appliance and node
 RUN dnf install -y \
     asciidoc \
     libvirt \
@@ -45,6 +45,10 @@ RUN dnf install -y \
     python3-jinja2 \
     python3-pyyaml \
     virt-install \
+    python3-sh \
+    oz \
+    imagefactory \
+    imagefactory-plugins-ovfcommon \
     && \
     dnf clean all
 
