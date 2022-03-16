@@ -44,6 +44,7 @@ WORKDIR /
 
 # Install missing dependencies for oVirt appliance and node
 RUN dnf install -y \
+    gettext-devel \
     asciidoc \
     libvirt \
     libguestfs-tools\
