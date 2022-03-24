@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Add manual packages
-        if: ${{ inputs.additional_packages }}
+        if: ${{ inputs.additional_packages != '' }}
         run: >
           echo "RUN dnf install -y ${{ inputs.additional_packages }}" >> Dockerfile.stream8
           echo "RUN dnf install -y ${{ inputs.additional_packages }}" >> Dockerfile.stream9
