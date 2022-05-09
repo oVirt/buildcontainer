@@ -8,6 +8,7 @@ RUN dnf copr enable -y ovirt/ovirt-master-snapshot centos-stream-8 \
 RUN dnf module enable -y \
     pki-deps \
     javapackages-tools \
+    maven:3.6 \
     nodejs:14
 
 # Add "build" user for optional non-root builds
