@@ -1,6 +1,6 @@
 FROM quay.io/centos/centos:stream9
 
-# DNF core plugins are installed in the official CS9 container image
+# Install DNF core plugins
 RUN dnf install -y dnf-plugins-core
 
 # Ensure crypto policies are installed
