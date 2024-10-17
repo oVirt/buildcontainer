@@ -34,9 +34,9 @@ jobs:
 
 ## Building
 
-You can build  and push the containers easily using `docker-compose`:
+You can build  and push the containers easily using `docker compose`:
 
 ```
-docker-compose build
-docker-compose push
+docker compose build
+docker compose push
 ```

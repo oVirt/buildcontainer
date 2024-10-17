@@ -11,4 +11,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Build image
-        run: docker-compose build
+        run: docker compose build
