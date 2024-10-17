@@ -20,8 +20,8 @@ jobs:
       - name: Add manual packages
         if: ${{ github.event.inputs.additional_packages }}
         run: |
-          echo "RUN dnf install -y ${{ github.event.inputs.additional_packages }} && dnf clean all" >> Dockerfile.stream8
           echo "RUN dnf install -y ${{ github.event.inputs.additional_packages }} && dnf clean all" >> Dockerfile.stream9
+          echo "RUN dnf install -y ${{ github.event.inputs.additional_packages }} && dnf clean all" >> Dockerfile.alamalinux9
       - name: Build image
         run: docker-compose build
       - name: Login to Quay.io

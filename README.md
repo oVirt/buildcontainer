@@ -4,8 +4,8 @@ This repository contains the source files for the build container for oVirt. Thi
 used utilities for building oVirt. The image names are:
 
 ```
-quay.io/ovirt/buildcontainer:el8stream
 quay.io/ovirt/buildcontainer:el9stream
+quay.io/ovirt/buildcontainer:almalinux9
 ```
 
 You can use it in GitHub Actions as follows:
@@ -21,10 +21,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: el8
-            container-name: el8stream
           - name: el9
             container-name: el9stream
+          - name: almalinux9
+            container-name: almalinux9
     name: ${{ matrix.name }}
     container:
       image: quay.io/ovirt/buildcontainer:${{ matrix.container-name }}

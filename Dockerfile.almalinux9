@@ -1,18 +1,21 @@
-FROM quay.io/centos/centos:stream8
+FROM quay.io/almalinuxorg/almalinux:9
 
 # Install DNF core plugins
 RUN dnf install -y dnf-plugins-core
 
+# Ensure crypto policies are installed
+RUN dnf install -y crypto-policies-scripts crypto-policies
+
+# Use legacy cryptopolicy as workaround for https://bugzilla.redhat.com/show_bug.cgi?id=2059101
+# until https://pagure.io/copr/copr/issue/2106 is fixed
+RUN update-crypto-policies --set LEGACY
+
 # Install oVirt repositories
-RUN dnf copr enable -y ovirt/ovirt-master-snapshot centos-stream-8 \
+RUN dnf copr enable -y ovirt/ovirt-master-snapshot centos-stream-9 \
     && dnf install -y ovirt-release-master
 
-# Configure CS8 modules
-RUN dnf module enable -y \
-    pki-deps \
-    javapackages-tools \
-    maven:3.6 \
-    nodejs:14
+# Configure CS9 repositories
+RUN dnf config-manager --enable crb
 
 # Add "build" user for optional non-root builds
 # Install required packages and the GitHub CLI tool so actions can use it when running in the container
@@ -55,3 +58,16 @@ RUN dnf install -y \
     imagefactory-plugins-ovfcommon \
     && \
     dnf clean all
+
+# Install dependencies for ost-images that we do not ship
+# Only on el9 since el8 container is not usable on el9 host
+# The resulting images are independent of build platform
+RUN git clone https://github.com/oVirt/ost-images.git \
+    && cd ost-images \
+    && autoreconf -i \
+    && ./configure \
+    && make spec \
+    && dnf builddep -y ost-images.spec \
+    && cd .. \
+    && rm -rf ost-images \
+    && dnf clean all
