@@ -9,3 +9,8 @@ services:
       context: .
       dockerfile: Dockerfile.almalinux9
     image: quay.io/ovirt/buildcontainer:almalinux9
+  rockylinux9:
+    build:
+      context: .
+      dockerfile: Dockerfile.rockylinux9
+    image: quay.io/ovirt/buildcontainer:rockylinux9
