@@ -4,6 +4,11 @@ services:
       context: .
       dockerfile: Dockerfile.stream9
     image: quay.io/ovirt/buildcontainer:el9stream
+  stream10:
+    build:
+      context: .
+      dockerfile: Dockerfile.stream10
+    image: quay.io/ovirt/buildcontainer:el10stream
   almalinux9:
     build:
       context: .
