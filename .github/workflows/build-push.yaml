@@ -16,16 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Add manual packages
         if: ${{ github.event.inputs.additional_packages }}
         run: |
           echo "RUN dnf install -y ${{ github.event.inputs.additional_packages }} && dnf clean all" >> Dockerfile.stream9
-          echo "RUN dnf install -y ${{ github.event.inputs.additional_packages }} && dnf clean all" >> Dockerfile.alamalinux9
+          echo "RUN dnf install -y ${{ github.event.inputs.additional_packages }} && dnf clean all" >> Dockerfile.almalinux9
+          echo "RUN dnf install -y ${{ github.event.inputs.additional_packages }} && dnf clean all" >> Dockerfile.stream10
       - name: Build image
         run: docker compose build
       - name: Login to Quay.io
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
