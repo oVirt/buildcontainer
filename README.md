@@ -5,7 +5,9 @@ used utilities for building oVirt. The image names are:
 
 ```
 quay.io/ovirt/buildcontainer:el9stream
+quay.io/ovirt/buildcontainer:el10stream
 quay.io/ovirt/buildcontainer:almalinux9
+quay.io/ovirt/buildcontainer:almalinux10
 ```
 
 You can use it in GitHub Actions as follows:
@@ -23,8 +25,12 @@ jobs:
         include:
           - name: el9
             container-name: el9stream
+          - name: el10
+            container-name: el10stream
           - name: almalinux9
             container-name: almalinux9
+          - name: almalinux10
+            container-name: almalinux10
     name: ${{ matrix.name }}
     container:
       image: quay.io/ovirt/buildcontainer:${{ matrix.container-name }}

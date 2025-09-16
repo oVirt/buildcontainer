@@ -14,3 +14,8 @@ services:
       context: .
       dockerfile: Dockerfile.almalinux9
     image: quay.io/ovirt/buildcontainer:almalinux9
+  almalinux10:
+    build:
+      context: .
+      dockerfile: Dockerfile.almalinux10
+    image: quay.io/ovirt/buildcontainer:almalinux10
