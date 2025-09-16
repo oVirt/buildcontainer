@@ -6,11 +6,14 @@ RUN dnf install -y dnf-plugins-core
 # Ensure crypto policies are installed
 RUN dnf install -y crypto-policies-scripts crypto-policies
 
+# Enable EPEL repository
+RUN dnf install -y epel-release
+
 # Install oVirt repositories
 RUN dnf copr enable -y ovirt/ovirt-master-snapshot centos-stream-10 \
     && dnf install -y ovirt-release-master
 
-# Configure CS9 repositories
+# Configure CRB repositories
 RUN dnf config-manager --enable crb
 
 # Add "build" user for optional non-root builds
