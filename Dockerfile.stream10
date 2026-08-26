@@ -10,8 +10,7 @@ RUN dnf install -y crypto-policies-scripts crypto-policies
 RUN dnf install -y epel-release
 
 # Install oVirt repositories
-RUN dnf copr enable -y ovirt/ovirt-master-snapshot centos-stream-10 \
-    && dnf install -y ovirt-release-master
+RUN dnf install -y https://resources.ovirt.org/pub/ovirt-master-snapshot/rpm/el10s/ovirt-release-master.rpm
 
 # Configure CRB repositories
 RUN dnf config-manager --enable crb
@@ -31,7 +30,7 @@ COPY containerroot /
 
 WORKDIR /tmp/src-rpm
 # Download source rpms and install it's dependencies
-RUN reposync --repoid=copr:copr.fedorainfracloud.org:ovirt:ovirt-master-snapshot --source --newest-only \
+RUN reposync --repoid=ovirt-master-snapshot --source --newest-only \
     && \
     find . -iname '*.src.rpm' -exec mv {} . \; \
     && \
